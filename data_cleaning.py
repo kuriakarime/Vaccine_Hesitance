@@ -1,7 +1,17 @@
 class VaccineDataCleaner:
-    def __init__(self, features_df, labels_df):
-        self.df = features_df.merge(labels_df, on='respondent_id')
-        self.cleaned = None
+    def __init__(self, features_df, labels_df=None):
+        """
+        If labels_df is provided, it merges on 'respondent_id'.
+        Otherwise, works with features_df alone.
+        """
+        if labels_df is not None:
+            self.df = features_df.merge(labels_df, on='respondent_id')
+        else:
+            self.df = features_df.copy()
+            
+    # def __init__(self, features_df, labels_df):
+    #     self.df = features_df.merge(labels_df, on='respondent_id')
+    #     self.cleaned = None
     
     def fill_missing(self):
         numeric_cols = self.df.select_dtypes(include=['float64', 'int64']).columns

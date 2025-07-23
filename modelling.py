@@ -7,6 +7,9 @@ from sklearn.metrics import (
     accuracy_score, precision_score, recall_score,
     f1_score, confusion_matrix, classification_report
 )
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt 
+import seaborn as sns
 
 class VaccineModel:
     def __init__(self, df, target, model=None, scale=False):
@@ -75,3 +78,24 @@ class VaccineModel:
         print(confusion_matrix(self.y_test, self.y_pred))
         print("\nClassification Report:")
         print(classification_report(self.y_test, self.y_pred))
+
+
+    # def plot_roc_curve(self):
+    #     plt.figure(figsize=(8, 6))
+
+    #     for name, model in self.trained_modeLs.items():
+    #         y_proba = model.predict_proba(self.X_test)[:, 1]
+    #         fpr, tpr, _ = roc_curve(self.y_test, y_proba)
+    #         roc_auc = auc(fpr, tpr)
+
+    #         plt.plot(fpr, tpr, label=f'{name} (AUC = {roc_auc:.2f})')
+
+    #     plt.plot([0, 1], [0, 1], 'k--', label='Random Guess')
+    #     plt.xlabel('False Positive Rate')
+    #     plt.ylabel('True Positive Rate')
+    #     plt.title(f'ROC Curve for `{self.target}`')
+    #     plt.legend(loc='lower right')
+    #     plt.grid(True)
+    #     plt.tight_layout()
+    #     plt.show()
+
